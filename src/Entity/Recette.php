@@ -7,8 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RecetteRepository::class)]
+#[UniqueEntity('libelle')]
+#[Vich\Uploadable]
+
 class Recette
 {
     #[ORM\Id]
@@ -49,8 +55,13 @@ class Recette
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'photos')]
+    private ?File $imageFile = null;
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
+
+    #[Vich\UploadableField(mapping: 'recipesVideos', fileNameProperty: 'videos')]
+    private ?File $videoFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $videos = null;
@@ -280,5 +291,36 @@ class Recette
         $this->liked->removeElement($liked);
 
         return $this;
+    }
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setVideoFile(?File $videoFile = null): void
+    {
+        $this->videoFile = $videoFile;
+
+        if (null !== $videoFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getVideoFile(): ?File
+    {
+        return $this->videoFile;
     }
 }
