@@ -10,56 +10,113 @@ use App\Entity\Recette;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Event\SubmitEvent;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints\File;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class RecetteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('libelle')
-            ->add('description')
-            ->add('slug')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
+            ->add('libelle',TextType::class,[
+                'label' => 'Nom de la recette',
+                'attr'=>[
+                    'placeholder'=>' Merci de saisir votre prénom',
+                    'class'=>'form-control rounded-pill'
+                ]
             ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('photo')
-            ->add('videos')
-            ->add('isPublic')
-            ->add('tempsPreparation', null, [
-                'widget' => 'single_text',
-            ])
+
+            ->add('tempsPreparation', TimeType::class,[
+                    'label'=>"Temps de préparation (H : M )",
+                    'attr'=>[
+                        'class'=>'form-control rounded-pill']]
+           )
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
-                'choice_label' => 'id',
+                'required' =>true,
+                'attr'=>[
+                    'class'=>'form-control rounded-pill'
+                ]
             ])
-            ->add('difficulte', EntityType::class, [
+            ->add('difficulte',EntityType::class, [
                 'class' => Difficulte::class,
-                'choice_label' => 'id',
-            ])
-            ->add('province', EntityType::class, [
-                'class' => Provinces::class,
-                'choice_label' => 'id',
-            ])
-            ->add('auteur', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
+                'label'=> 'Niveau de difficulté',
+                'required' =>true,
+                'attr'=>[
+                    'class'=>'form-control rounded-pill'
+                ]
             ])
             ->add('ingredients', EntityType::class, [
                 'class' => Ingredients::class,
-                'choice_label' => 'id',
-                'multiple' => true,
+                'label' => 'choisissez vos ingrédients(un à plusieurs ingrédients au choix)',
+                'attr'=>[
+                    'class'=>' form-control rounded-pill'
+                ],
+                'multiple'=> true,
+                'required' =>true
             ])
-            ->add('liked', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-                'multiple' => true,
+            ->add('province', EntityType::class, [
+                'class' => Provinces::class,
+                'attr'=>[
+                    'class'=>'form-control rounded-pill'
+                ],
+                'required'=>false,
             ])
+
+            ->add('imageFile', FileType::class, [
+                'label' => 'ajouter une photo pour votre recette(JPG ou PNG) ',
+                'attr'=>[
+                    'class'=>'form-control rounded-pill'
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '10000K',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Merci de télécharger un fichier valide',
+                    ])
+                ]
+            ])
+            ->add('description',TextareaType::class,[
+                'attr'=> [
+                    'class'=> "form-control rounded-4",
+                    "rows"=> "8",
+                ]
+            ])
+            ->add('isPublic', CheckboxType::class,[
+                'label' => 'Recette publique',
+                'required'=>false,
+            ])
+            ->add('submit', SubmitType::class,[
+                'label'=>"Valider",
+                'attr'=>[
+                    'class'=>'btn btn-dark my-3 form-control rounded-pill'
+                ]
+            ])
+
         ;
+        $builder->addEventListener(FormEvents::SUBMIT, function (SubmitEvent $event) {
+            /** @var Recette $recette */
+            $recette = $event->getData();
+            if (null === $recette->getSlug() && $recette !== $recette->getLibelle()) {
+                $slugger = new AsciiSlugger();
+                $recette->setSlug($slugger->slug($recette->getLibelle())->lower());
+            }
+        });
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

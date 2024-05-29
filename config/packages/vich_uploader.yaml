@@ -3,8 +3,8 @@ vich_uploader:
 
     mappings:
         recipes:
-            uri_prefix: /images/recipes
-            upload_destination: '%kernel.project_dir%/public/images/recipes'
+            uri_prefix: /uploads
+            upload_destination: '%kernel.project_dir%/public/uploads'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
         recipesVideos:

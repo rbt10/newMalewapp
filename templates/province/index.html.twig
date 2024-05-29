@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recette - {{ province.libelle }} {% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid header-register padding-50">
+        <div class="container p-5 rounded-pill-login rounded-5 vh-100">
+            <div class="row">
+                <h1 class="fw-bold text-center text-white">Recette de la province {{ province.libelle }}</h1>
+
+                <!-- On affiche que les recettes publique -->
+                {% if recettes is empty %}
+                    <p class="display-6 pt-5 text-white">Aucune recette enrégistrée</p>
+                {% else %}
+                    {% for recette in recettes %}
+                        <div class="col-12 col-md-3 p-2">
+                            {% include 'recette/_single.html.twig' %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

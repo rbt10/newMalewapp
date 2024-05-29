@@ -3,9 +3,30 @@
 {% block title %}New Recette{% endblock %}
 
 {% block body %}
-    <h1>Create new Recette</h1>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    {{ include('recette/_form.html.twig') }}
+    <div class=" bg-addRecette container-fluid  h-100  ">
+        <div class="container d-flex justify-content-center align-item-center padding-50">
+            <div class="row rounded-5 rounded-pill-login ">
+                <div class=" col-12 col-md-10 mx-auto text-white">
+                    <h1 class="mt-4 display-4">Ajouter une recette</h1>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success mt-4">{{ message }}</div>
+                    {% endfor %}
+                    <hr>
+                    {{ include('recette/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 
-    <a href="{{ path('app_recette_index') }}">back to list</a>
+
+
 {% endblock %}

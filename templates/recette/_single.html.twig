@@ -1,0 +1,14 @@
+<div class="card" >
+    {% if recette.photo %}
+        <img src="{{asset ('uploads/'~ recette.photo)}}" alt="{{recette.libelle  }}" height="200px" class="card-img-top  rounded-top">
+    {% endif %}
+    {% if recette.videos %}
+        <video src="{{asset ('uploads/'~recette.videos)}}" class="card-img-top"  controls allowfullscreen></video>
+    {% endif %}
+
+    <div class="card-body">
+        <a href="{{ path('app_recette_show',{'slug': recette.slug}) }}" class="nav-link"><h4 class="card-title fw-bold text-center text-capitalize">{{ recette.libelle }}</h4></a>
+        <p>{{ recette.description|slice(0, 50) }}</p>
+
+    </div>
+</div>

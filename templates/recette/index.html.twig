@@ -1,51 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recette index{% endblock %}
+{% block title %}Nos recettes{% endblock %}
 
 {% block body %}
-    <h1>Recette index</h1>
+    <div class="container-fluid bg-Allrecette h-100">
+        <div class="container padding-50">
+            <div class="row rounded-4 rounded-pill-login p-5">
+                <div class=" col-12 col-md-3 text-white">
+                    <p >Filtrer</p>
+                    {{ form(form) }}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>Description</th>
-                <th>Slug</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>Photo</th>
-                <th>Videos</th>
-                <th>IsPublic</th>
-                <th>TempsPreparation</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for recette in recettes %}
-            <tr>
-                <td>{{ recette.id }}</td>
-                <td>{{ recette.libelle }}</td>
-                <td>{{ recette.description }}</td>
-                <td>{{ recette.slug }}</td>
-                <td>{{ recette.createdAt ? recette.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ recette.updatedAt ? recette.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ recette.photo }}</td>
-                <td>{{ recette.videos }}</td>
-                <td>{{ recette.isPublic ? 'Yes' : 'No' }}</td>
-                <td>{{ recette.tempsPreparation ? recette.tempsPreparation|date('H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_recette_show', {'id': recette.id}) }}">show</a>
-                    <a href="{{ path('app_recette_edit', {'id': recette.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                </div>
+                <div class="col-md-9">
+                    <h1 class="fw-bold mb-4 text-white" >Nos Recettes</h1>
+                    <div class="row ">
+                        <!-- On affiche que les recettes publiques -->
+                        {% for recette in recettes %}
 
-    <a href="{{ path('app_recette_new') }}">Create new</a>
+                            <div class="col-md-4 col-lg-4 mb-3">
+                                {% include 'recette/_single.html.twig' %}
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                    <div class="d-flex justify-content-center pagination mt-5">
+                        <ul class="pagination">
+                            {% for page in 1..recettes.pageCount %}
+                                <li class="page-item{% if page == recettes.getCurrentPageNumber() %} active{% endif %} p-1">
+                                    <a class="page-link rounded-circle " href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page})) }}">{{ page }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

@@ -1,58 +1,102 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recette{% endblock %}
+{% block title %}recette -{{ recette.libelle }}{% endblock %}
 
 {% block body %}
-    <h1>Recette</h1>
+    <div class=" container-fluid bg-Showrecette">
+        <div class="container d-flex justify-content-center align-item-center padding-50">
+            <div class="row  p-5 text-white rounded-5 rounded-pill-login">
+                <div class=" col-12 col-md-10 mx-auto ">
+                    <h1 class="fw-lighter text-capitalize text-center">{{recette.libelle }}
+                        <a type="button" class="  btn btn-primary rounded-4  ms-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Partager <i class="fa-solid fa-share-nodes"></i>
+                        </a>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ recette.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ recette.libelle }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ recette.description }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ recette.slug }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ recette.createdAt ? recette.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ recette.updatedAt ? recette.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ recette.photo }}</td>
-            </tr>
-            <tr>
-                <th>Videos</th>
-                <td>{{ recette.videos }}</td>
-            </tr>
-            <tr>
-                <th>IsPublic</th>
-                <td>{{ recette.isPublic ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>TempsPreparation</th>
-                <td>{{ recette.tempsPreparation ? recette.tempsPreparation|date('H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 text-black" id="staticBackdropLabel">Partager la recette</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-black ">
+                                        Découvrez cette délicieuse recette que je viens de préparer ! <br>
+                                        Partagez-la avec vos amis et faites-leur plaisir en cuisine.
 
-    <a href="{{ path('app_recette_index') }}">back to list</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-    <a href="{{ path('app_recette_edit', {'id': recette.id}) }}">edit</a>
+                    </h1>
+                    <hr>
 
-    {{ include('recette/_delete_form.html.twig') }}
+
+                    {% if recette.photo %}
+                        <img src="/uploads/{{ recette.photo }}" alt="{{recette.libelle }}" class="img-fluid rounded-show  rounded-5">
+                    {% endif %}
+                    {% if recette.videos %}
+                        <video src="{{ asset('uploads/' ~ recette.videos) }}" class="rounded" width="100%" controls allowfullscreen></video>
+
+                    {% endif %}
+                    <div class="text-center">
+                        {% if recette.liked.contains(app.user) %}
+                            <a href="{{ path('app_unlike' , {'id' : recette.id}) }}" class="js-like nav-link">
+                                <i class="fas fa-heart text-danger"></i>
+                                <span class="js-likes">Je n'aime pas
+									{{recette.liked.count}}</span>
+                            </a>
+
+                        {% else %}
+                            <a href="{{ path('app_like' , {'id' : recette.id}) }}" class="js-like nav-link">
+                                <i class="far fa-heart"></i>
+                                <span class="js-likes">J'aime
+									{{recette.liked.count}}</span>
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="bg-white rounded-start  p-1 my-3">
+                        <h3 class="text-orange text-center ">Préparation</h3>
+                    </div>
+
+                    <div class="row rounded-show rounded-4 p-4">
+                        <div class="col-12">
+                            <h5 class="text-uppercase">Les ingrédients</h5>
+                            <p class="bg-success p-2 text-white bg-opacity-10 fw-lighter">
+                                {% for ingredient in recette.ingredients %}
+                                    {{ ingredient.libelle }}
+                                {% endfor %}
+                            </p>
+
+                            <h5 class="text-uppercase">type de plat</h5>
+                            <p class="bg-success p-2 text-white bg-opacity-10 fw-lighter">
+                                {{ recette.categorie }}
+                            </p>
+                            <h5 class="text-uppercase">Temps de préparation</h5>
+                            <p class="bg-success p-2 text-white bg-opacity-10 fw-lighter ">
+                                {{ recette.tempsPreparation .format('H:i:s')}}
+                            </p>
+
+                            <hr>
+                            <h5 class="text-uppercase">Comment faire</h5>
+                            <p class="bg-success p-2 text-white bg-opacity-10 fw-lighter">
+                                {{ recette.description | raw  }}
+                            </p>
+                            <p>recette publiée par
+                                <a href="" class="js-like nav-link">{{ recette.auteur.email }}</p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </div>
 {% endblock %}

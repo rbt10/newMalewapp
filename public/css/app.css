@@ -1,0 +1,208 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+
+
+
+nav {
+    background-color: #d96347;
+}
+body {
+
+    padding: 0;
+    margin: 0;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Roboto', 'sans-serif';
+}
+#text-coral{
+    color: #d96347;
+}
+#text-coral:hover{
+    color: whitesmoke;
+}
+
+.text-orange {
+    color: #d96347;
+}
+.bg-orange {
+    background-color: #d96347;
+}
+#myButton {
+    background-color: #d96347                                                                                                                                                                                          ;
+    color: azure;
+}
+#myButton:hover {
+    background-color: white;
+    color:  #d96347;
+    border: 0.5px solid #d96347 !important;
+}
+.rounded-pill{
+    border: 0.5px solid white !important;
+}
+
+.rounded-show{
+    border: 0.2px solid white !important;
+}
+.rounded-pill-login{
+    border: 2px solid #d96347 !important;
+}
+.bg-province{
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/alys.jpg");
+}
+.header-rechercher {
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/Header.jpg");
+    position: relative;
+}
+.header-profile{
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/ahm.jpg");
+    background-size: cover;
+    background-position: center center;
+}
+.bg-addRecette{
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/cal.jpg");
+}
+
+.header-register {
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/MAL1.jpg");
+    background-size: cover;
+    background-position: center center;
+}
+
+.header-contact {
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/alys.jpg");
+    background-size: cover;
+    background-position: center center;
+}
+.card-height{
+    height: 200px;
+    width: 18rem;
+}
+
+.btn {
+  width: 160px;
+}
+.about-content {
+    width: 100%;
+    max-width: 575px;
+    margin-right: 50px;
+}
+.about-image {
+    width: 100%;
+    max-width: 550px;
+}
+
+.primary-btn.arrow {
+    padding-right: 70px;
+    padding-left: 24px;
+    background-image: url("https://uploads-ssl.webflow.com/6236be9ba964064c0ce400f8/6247f3ac0fc1ebda858d58d4_arrow.svg");
+    background-position: 85% 50%;
+    background-size: auto;
+    background-repeat: no-repeat;
+    -webkit-transition: color 300ms ease, background-color 300ms ease;
+    transition: color 300ms ease, background-color 300ms ease;
+}
+
+.primary-btn {
+    padding: 8px 30px;
+    border: 1px solid #000;
+    border-radius: 50px;
+    background-color: transparent;
+    -webkit-transition: background-color 300ms ease;
+    transition: background-color 300ms ease;
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.padding-300{
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+
+.padding-50{
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+.padding-200{
+    padding-top: 120px;
+}
+.password:hover{
+    color:  #ccc ;
+}
+
+/* recette CONTENT
+-------------------------------------------------- */
+/*
+page show, affichage d'images
+ */
+
+
+.recette .col-lg-3 {
+    margin-bottom: 1.5rem;
+
+}
+.recette h2 {
+    font-weight: 400;
+}
+.recette .col-lg-3 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the recette headings */
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+}
+.card-image {
+    object-fit: cover; /* redimensionner l'image pour remplir la hauteur de la carte */
+    height: 100%; /* définir la hauteur de l'image sur 100% pour remplir la carte */
+}
+
+.box-area{
+    width: 930px;
+}
+
+.star {
+    cursor: pointer;
+}
+
+.filled-star {
+    color: gold; /* Couleur de l'étoile remplie */
+}
+
+.hovered-star {
+    color: yellow; /* Couleur de l'étoile survolée */
+    
+}
+.img-carree {
+    clip-path:ellipse(35% 50%);
+}
+
+.image-container {
+    text-align: center;
+    padding: 20px;
+}
+
+
+

@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
+use App\Services\NavProvinces;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,8 +20,10 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    public function __construct(private EmailVerifier $emailVerifier)
+    private NavProvinces $navProvinces;
+    public function __construct(private EmailVerifier $emailVerifier,NavProvinces $navProvinces)
     {
+        $this->navProvinces = $navProvinces;
     }
 
     #[Route('/register', name: 'app_register')]
@@ -41,22 +45,18 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('noreply@malewapp.com', 'Noreply'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
-
-            // do anything else you need here, like send an email
+            $email = new Mail();
+            $vars =[
+                'nom' =>$user->getNom()
+            ];
+            $email->send($user->getEmail(),$user->getNom(). ' ' . $user->getPrenom(), 'Bienvenue sur Malewapp', $content);
 
             return $this->redirectToRoute('app_home');
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
+            'provinces' => $this->navProvinces->provinces(),
         ]);
     }
 

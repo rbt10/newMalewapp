@@ -2,19 +2,25 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\RecetteRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RecetteRepository::class)]
 #[UniqueEntity('libelle')]
 #[Vich\Uploadable]
 
+#[ApiResource]
 class Recette
 {
     #[ORM\Id]
@@ -38,7 +44,7 @@ class Recette
     private ?Provinces $province = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $slug = null;
+    private ?string $slug = null ;
 
     #[ORM\ManyToOne(inversedBy: 'recettes')]
     private ?User $auteur = null;
@@ -49,13 +55,15 @@ class Recette
     #[ORM\ManyToMany(targetEntity: Ingredients::class, inversedBy: 'recettes')]
     private Collection $ingredients;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime_immutable')]
+
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'photos')]
+    #[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'photo')]
+    #[Assert\Image()]
     private ?File $imageFile = null;
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
@@ -67,7 +75,7 @@ class Recette
     private ?string $videos = null;
 
     #[ORM\Column]
-    private ?bool $isPublic = null;
+    private ?bool $isPublic = false;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $tempsPreparation = null;
@@ -76,7 +84,11 @@ class Recette
      * @var Collection<int, User>
      */
     #[ORM\ManyToMany(targetEntity: User::class)]
+    #[ORM\JoinTable('user_post_like')]
     private Collection $liked;
+
+    #[ORM\Column]
+    private ?bool $isBest = false;
 
     public function __construct()
     {
@@ -250,7 +262,7 @@ class Recette
         return $this->isPublic;
     }
 
-    public function setPublic(bool $isPublic): static
+    public function setIsPublic(bool $isPublic): static
     {
         $this->isPublic = $isPublic;
 
@@ -323,4 +335,23 @@ class Recette
     {
         return $this->videoFile;
     }
+
+    public function __toString()
+    {
+        return $this->libelle;
+    }
+
+    public function isBest(): ?bool
+    {
+        return $this->isBest;
+    }
+
+    public function setBest(bool $isBest): static
+    {
+        $this->isBest = $isBest;
+
+        return $this;
+    }
+
+
 }

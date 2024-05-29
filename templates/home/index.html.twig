@@ -1,20 +1,134 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Malewapp-Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section class=" header-rechercher padding-300 text-center text-sm-start">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 col-md-7">
+                    <div class="section-title text-center">
+                        <h1 class="text-center text-light fw-lighter display-5 mb-3">Que voulez-vous <br> préparer aujourd'hui ?</h1>
+                        {{ form(form) }}
+                    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                </div>
+            </div>
+        </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/user/Documents/recipies/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/user/Documents/recipies/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    </section>
+
+    <!--Fin Recherche -->
+
+    <!--Présentation -->
+    <section class="presentation-position">
+        <div class="container row-position p-5 rounded-5 shadow-lg">
+            <div class="row presentation rounded-5 pe-md-4 ps-md-4 shadow-lg">
+                <div class="col-12 col-md-7">
+                    <h1 class="display-5 fw-semibold text-white text-uppercase mt-5">Je suis Malewapp</h1>
+                    <p class="pb-3">Votre site pour découvrir les saveurs du Congo RDC et ses Provinces</p>
+                    <p class="w-100 w-md-75">Créée en 2024 à Kinshasa, Malewapp s’est donnée pour mission de diversifier le contenu de la gastronomie congolaise et faire découvrir les nombreuses saveurs de ce pays au travers de la convivialité des différents passionnés du domaine culinaire.</p>
+                    <a class="btn btn-outline-dark rounded-4 mt-5" href="">En savoir plus</a>
+                </div>
+                <div class="col-12 col-md-5 d-none d-md-block"> <!-- Utilisation de classes d-none (pour les écrans de petite taille) et d-md-block (pour les écrans de taille MD et supérieure) pour masquer l'image sur les écrans de petite taille -->
+                    <img src="{{ asset('images/madesu.jpg') }}" class="img-fluid rounded-circle" alt="homme assis">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Fin Présentation -->
+    <!--Nos Partenaires -->
+    <section class="partenaires">
+        <div class="container py-4">
+            <h1 class="display-5 text-orange text-center fw-semibold pb-3">Ils nous ont fait confiance</h1>
+            <p class="text-center">Le premier fidèle de la marque Malewapp est avant tout le citoyen congolais. À ce dernier viennent se greffer les chaînes de restauration diverses, les enseignes diverses, les experts et indépendants restaurateurs, les apprentis et amateurs de cuisine, les valorisateurs de la culture congolaise culinaire, les créateurs des contenus culinaires, les critiques culinaires et enfin les désireux tous prêts à partager un plat exceptionnel quotidien.</p>
+            <hr>
+            <div class="row justify-content-center align-items-center text-center mb-4">
+                <div class="col-md-3 col-sm-6 mb-3"> <!-- Pour les tablettes, 3 colonnes -->
+                    <img src="{{ asset('images/Log1.png') }}" alt="" class="img-fluid reduced-size" />
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3"> <!-- Pour les tablettes, 3 colonnes -->
+                    <img src="{{ asset('images/Log2.png') }}" alt="" class="img-fluid reduced-size" />
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3"> <!-- Pour les tablettes, 3 colonnes -->
+                    <img src="{{ asset('images/Log3.png') }}" alt="" class="img-fluid reduced-size" />
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3"> <!-- Pour les tablettes, 3 colonnes -->
+                    <img src="{{ asset('images/Log4.png') }}" alt="" class="img-fluid reduced-size" />
+                </div>
+            </div>
+            <hr>
+        </div>
+    </section>
+    <!--Meilleures recettes -->
+    <section id="best" class="p-5">
+        <div class="container">
+            <!-- Affichage des meilleures recettes avec images -->
+            <div class="row">
+                <h2 class="fw-bold text-orange display-5 fw-semibold">Nos meilleures recettes</h2>
+                <p class="fw-light mb-4">Découvrez les repas de la RDC</p>
+
+                {% set count = 0 %}
+                {% for recette in recettes %}
+                    {% if recette.isBest and count < 3 %}
+                        {% set count = count + 1 %}
+                        <div class="col-12 col-md-4 mb-1">
+                            <a href="{{ path('app_show', {'slug': recette.slug}) }}" class="nav-link">
+                                <img src="{{ asset('uploads/' ~ recette.photo) }}" alt="{{ recette.libelle }}" class="card-img-top rounded-4">
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>        <!-- Fin Affichage des meilleures recettes avec images -->
+    <section class="p-5">
+        <div class="container">
+            <!-- Affichage des vidéos des deux meilleures recettes -->
+            <div class="row ">
+                {% set videosCount = 0 %}
+                {% for recette in recettes %}
+                    {% if recette.isBest and recette.videos and videosCount < 2 %}
+                        {% set videosCount = videosCount + 1 %}
+                        <div class="col-md mb-4 ">
+                            <h3 class="text-orange"><a href="{{ path('app_show', {'slug': recette.slug}) }}" class="nav-link">{{ recette.libelle }}</a></h3>
+                            <p>{{ recette.description }}</p>
+
+                        </div>
+                        <div class="col-md text-center">
+                            <video src="{{ asset('uploads/' ~ recette.videos) }}" class="rounded-4"  controls allowfullscreen>
+                            </video>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <!--Fin Meilleures recettes -->
+    <!--chefs -->
+    <section class="mb-5">
+        <div class="container rounded-4 shadow-lg chefs">
+            <h2 class="display-4 fw-semibold text-center text-orange text-uppercase mb-4">Nos Chefs</h2>
+            <p class="text-center">Morbi in sed enim viverra aenean amet. A commodo nunc mauris, in accumsan facilisi montes, neque venenatis.</p>
+            <div class="row mx-2">
+                <div class="col-sm-6 col-md-3 mb-4">
+                    <img src="{{ asset('images/chef1.jpg') }}" class="img-fluid rounded-4 zoom-in-out" alt="">
+                </div>
+                <div class="col-sm-6 col-md-3 mb-4">
+                    <img src="{{ asset('images/chef2.jpg') }}" class="img-fluid rounded-4 zoom-in-out" alt="">
+                </div>
+                <div class="col-sm-6 col-md-3 mb-4">
+                    <img src="{{ asset('images/chef3.jpg') }}" class="img-fluid rounded-4 zoom-in-out" alt="">
+                </div>
+                <div class="col-sm-6 col-md-3 mb-4">
+                    <img src="{{ asset('images/chef4.jpg') }}" class="img-fluid rounded-4 zoom-in-out" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
 {% endblock %}

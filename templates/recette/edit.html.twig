@@ -3,11 +3,35 @@
 {% block title %}Edit Recette{% endblock %}
 
 {% block body %}
-    <h1>Edit Recette</h1>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    {{ include('recette/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_recette_index') }}">back to list</a>
+    <div class="bg-addRecette container-fluid  h-100  ">
+        <div class="container d-flex justify-content-center align-item-center padding-50">
+            <div class="row rounded-5 rounded-pill-login ">
+                <div class=" col-12 col-md-10 mx-auto text-white">
+                    <h1 class="mt-4 fw-lighter">Modifier la recette</h1>
+                    <hr>
+                    {{ include('recette/_form.html.twig', {'button_label': 'Update'}) }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+
+
+
+
 
     {{ include('recette/_delete_form.html.twig') }}
 {% endblock %}
