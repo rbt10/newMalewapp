@@ -8,7 +8,7 @@
 
     <div class="card-body">
         <a href="{{ path('app_recette_show',{'slug': recette.slug}) }}" class="nav-link"><h4 class="card-title fw-bold text-center text-capitalize">{{ recette.libelle }}</h4></a>
-        <p>{{ recette.description|slice(0, 30) }}...</p>
+        <p>{{ recette.description|slice(0, 20) }}...</p>
 
     </div>
 </div>
