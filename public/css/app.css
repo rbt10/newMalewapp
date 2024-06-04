@@ -1,12 +1,23 @@
+.header-login {
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/ted.jpg");
+    background-size: cover;
+    background-position: center center;
+}
+.bg-Allrecette {
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/ja.jpg");
+}
+.bg-coral {
+    background-color: #d96347;
+}
+
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
 
 
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-
-
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 nav {
     background-color: #d96347;
@@ -45,6 +56,24 @@ h1,h2,h3,h4,h5,h6 {
     border: 0.5px solid white !important;
 }
 
+
+/* Ajoutez cette règle CSS pour changer la couleur de survol des éléments de la liste déroulante */
+.dropdown-menu a:hover {
+    background-color: #d96347; /* Couleur de survol orange foncé */
+    color: white; /* Couleur du texte en blanc */
+}
+
+.bg-profile {
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/chri.jpg");
+
+}
+.bg-addRecette{
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/cal.jpg");
+}
 .rounded-show{
     border: 0.2px solid white !important;
 }
@@ -54,33 +83,58 @@ h1,h2,h3,h4,h5,h6 {
 .bg-province{
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/alys.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/alys.jpg");
 }
 .header-rechercher {
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/Header.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/Header.jpg");
     position: relative;
 }
 .header-profile{
-    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/ahm.jpg");
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/ahm.jpg");
     background-size: cover;
     background-position: center center;
 }
 .bg-addRecette{
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/cal.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/cal.jpg");
 }
 
 .header-register {
-    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/MAL1.jpg");
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/MAL1.jpg");
     background-size: cover;
     background-position: center center;
 }
+.presentation-position{
+    position: relative;
+    top: -70px;
+}
+.row-position {
+    background-color: white;
+}
+.presentation{
+    background-color: #d96347;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
+}
+
+.chefs{
+    padding-bottom: 70px;
+    padding-top: 50px;
+    padding-right: 50px;
+}
+
+/* Ajoutez ces styles dans votre fichier CSS */
+.img-fluid.reduced-size {
+    width: 150px; /* Réglez la largeur souhaitée en pixels */
+    height: 100px; /* Réglez la hauteur souhaitée en pixels */
+}
 .header-contact {
-    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/alys.jpg");
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/alys.jpg");
     background-size: cover;
     background-position: center center;
 }
@@ -90,7 +144,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .btn {
-  width: 160px;
+    width: 160px;
 }
 .about-content {
     width: 100%;
@@ -129,7 +183,12 @@ h1,h2,h3,h4,h5,h6 {
     padding-top: 200px;
     padding-bottom: 200px;
 }
+.bg-Showrecette {
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/MAL2.jpg");
 
+}
 .padding-50{
     padding-top: 120px;
     padding-bottom: 120px;
@@ -193,7 +252,7 @@ page show, affichage d'images
 
 .hovered-star {
     color: yellow; /* Couleur de l'étoile survolée */
-    
+
 }
 .img-carree {
     clip-path:ellipse(35% 50%);
