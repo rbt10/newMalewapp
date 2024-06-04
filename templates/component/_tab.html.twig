@@ -1,0 +1,6 @@
+<div class=" me-2 {% if app.request.get('_route') == route %} active {% else %} text-light {% endif %}">
+    <!-- Contenu de la barre de navigation -->
+    <a href="{% block path %} {% endblock %}" class= 'nav-link'>
+      {% block content %} {% endblock %}
+    </a>
+</div>

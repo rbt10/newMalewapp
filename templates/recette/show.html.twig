@@ -86,14 +86,44 @@
                             <p class="bg-success p-2 text-white bg-opacity-10 fw-lighter">
                                 {{ recette.description | raw  }}
                             </p>
-                            <p>recette publiée par
-                                <a href="" class="js-like nav-link">{{ recette.auteur.email }}</p>
+                            <p>recette publiée par: {{ recette.auteur.email }}
                             </p>
                         </div>
                     </div>
                 </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        {% if app.user %}
+                            {{ form_start(commentForm) }}
+                                {{ form_widget(commentForm.contenu,{'attr':{ 'class':'form-control'}}) }}
+                            <input type="submit" id="myButton" class="btn rounded-pill mt-2">
+                            {{ form_end(commentForm) }}
+                        {% else %}
+                            <p>Vous devez vous connecter afin de laisser un commentaire.</p>
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="row mt-4 row rounded-show rounded-4 p-4">
+                    <div class="col-12 rating-stars">
+                        <h4 class="fw-bolder">
+                            Commentaires :
+                        </h4>
+                    </div>
+
+                    {% for commentaire in recette.commentaires %}
+                        <p>Publié par
+                            {{ commentaire.auteur }}
+                            le
+                            {{ commentaire.createdAt| date("d/m/Y H:i") }}</p>
+                        <div class="bg-success p-2 text-white bg-opacity-10 fw-lighter">{{ commentaire.contenu }}</div>
+
+                    {% endfor %}
+                </div>
+
 
             </div>
+
         </div>
 
 

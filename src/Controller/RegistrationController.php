@@ -44,13 +44,10 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-
-            $email = new Mail();
-            $vars =[
-                'nom' =>$user->getNom()
-            ];
-            $email->send($user->getEmail(),$user->getNom(). ' ' . $user->getPrenom(), 'Bienvenue sur Malewapp', $content);
-
+            $this->addFlash(
+                type: 'success',
+                message:'Votre message a été envoyé avec succès'
+            );
             return $this->redirectToRoute('app_home');
         }
 

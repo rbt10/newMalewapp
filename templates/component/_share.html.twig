@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-center ">
+    <a class="nav-link"  href="https://facebook.com/sharer/sharer.php?u={{ absolute_url(path('app_show',{slug: recette.slug})) }}">
+        <i class="fa-brands fa-facebook text-primary"></i>
+    </a>
+    <a class="nav-link" href="https://twitter.com/intent/tweet?text={{ recette.name|url_encode }}%20{{ absolute_url(path('app_show',{slug: recette.slug})) }}%20@malewapp">
+        <i class="fa-brands fa-x-twitter text-black"></i>
+    </a>
+
+    <a href="https://www.instagram.com/sharer.php?u={{ absolute_url(path('app_show',{slug: recette.slug})) }}" target="_blank" class="nav-link" >
+        <i class="fa-brands fa-instagram text-danger"></i>
+    </a>
+
+</div>

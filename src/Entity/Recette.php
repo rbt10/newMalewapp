@@ -90,10 +90,18 @@ class Recette
     #[ORM\Column]
     private ?bool $isBest = false;
 
+    /**
+     * @var Collection<int, Commentaire>
+     */
+    #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'recette')]
+    private Collection $commentaires;
+
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->liked = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -352,6 +360,38 @@ class Recette
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getRecette() === $this) {
+                $commentaire->setRecette(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 
 
 }

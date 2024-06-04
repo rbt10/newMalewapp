@@ -55,10 +55,24 @@ h1,h2,h3,h4,h5,h6 {
 .rounded-pill{
     border: 0.5px solid white !important;
 }
+
+
+/* Ajoutez cette règle CSS pour changer la couleur de survol des éléments de la liste déroulante */
+.dropdown-menu a:hover {
+    background-color: #d96347; /* Couleur de survol orange foncé */
+    color: white; /* Couleur du texte en blanc */
+}
+
+.bg-profile {
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/chri.jpg");
+
+}
 .bg-addRecette{
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../assets/images/cal.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/cal.jpg");
 }
 .rounded-show{
     border: 0.2px solid white !important;

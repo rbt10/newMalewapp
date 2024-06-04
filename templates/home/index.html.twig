@@ -17,9 +17,10 @@
         </div>
 
     </section>
-
     <!--Fin Recherche -->
-
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">{{ message }}</div>
+    {% endfor %}
     <!--Présentation -->
     <section class="presentation-position">
         <div class="container row-position p-5 rounded-5 shadow-lg">
@@ -28,7 +29,7 @@
                     <h1 class="display-5 fw-semibold text-white text-uppercase mt-5">Je suis Malewapp</h1>
                     <p class="pb-3">Votre site pour découvrir les saveurs du Congo RDC et ses Provinces</p>
                     <p class="w-100 w-md-75">Créée en 2024 à Kinshasa, Malewapp s’est donnée pour mission de diversifier le contenu de la gastronomie congolaise et faire découvrir les nombreuses saveurs de ce pays au travers de la convivialité des différents passionnés du domaine culinaire.</p>
-                    <a class="btn btn-outline-dark rounded-4 mt-5" href="">En savoir plus</a>
+                    <a class="btn btn-outline-dark rounded-4 mt-5" href="{{ path("app_apropos") }}">En savoir plus</a>
                 </div>
                 <div class="col-12 col-md-5 d-none d-md-block"> <!-- Utilisation de classes d-none (pour les écrans de petite taille) et d-md-block (pour les écrans de taille MD et supérieure) pour masquer l'image sur les écrans de petite taille -->
                     <img src="{{ asset('images/madesu.jpg') }}" class="img-fluid rounded-circle" alt="homme assis">

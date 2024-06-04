@@ -32,6 +32,7 @@ class RecetteCrudController extends AbstractCrudController
             SlugField::new('slug')->setTargetFieldName('libelle'),
             ImageField::new('photo')->setLabel('Image')->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]')->setBasePath('/uploads')->setUploadDir('/public/uploads'),
             BooleanField::new('isPublic')->setLabel('Recette publique'),
+            BooleanField::new('isBest')->setLabel('meilleure recette'),
             AssociationField::new('auteur')->setLabel('Le propriétaire de la recette'),
             AssociationField::new('province'),
 

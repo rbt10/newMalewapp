@@ -16,6 +16,13 @@ class SecurityController extends AbstractController
     {
         $this->navProvinces = $navProvinces;
     }
+    #[Route(path: '/profile', name: 'app_profile')]
+    public function index()
+    {
+        return $this->render('profile/index.html.twig', [
+            'provinces' => $this->navProvinces->provinces()
+        ]);
+    }
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

@@ -61,7 +61,7 @@ class RecetteType extends AbstractType
                 'class' => Ingredients::class,
                 'label' => 'choisissez vos ingrédients(un à plusieurs ingrédients au choix)',
                 'attr'=>[
-                    'class'=>' form-control rounded-pill'
+                    'class'=>'select2 form-control rounded-pill'
                 ],
                 'multiple'=> true,
                 'required' =>true
@@ -69,7 +69,7 @@ class RecetteType extends AbstractType
             ->add('province', EntityType::class, [
                 'class' => Provinces::class,
                 'attr'=>[
-                    'class'=>'form-control rounded-pill'
+                    'class'=>'select2  form-control rounded-pill'
                 ],
                 'required'=>false,
             ])

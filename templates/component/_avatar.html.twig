@@ -1,0 +1,6 @@
+{% if profile and profile.image %}
+    <img src="{{profiles ~ profile.image}} " alt="logo" class="img-fluid rounded-4">
+{% else %}
+    <i class="fas fa-user-circle fa-3x"></i>
+    <p>Pas de photo de profil</p>
+{% endif %}
