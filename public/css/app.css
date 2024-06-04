@@ -1,12 +1,12 @@
 .header-login {
-    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/ted.jpg");
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/ted.jpg");
     background-size: cover;
     background-position: center center;
 }
 .bg-Allrecette {
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/ja.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/ja.jpg");
 }
 .bg-coral {
     background-color: #d96347;
@@ -66,13 +66,13 @@ h1,h2,h3,h4,h5,h6 {
 .bg-profile {
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/chri.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../images/chri.jpg");
 
 }
 .bg-addRecette{
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/cal.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/cal.jpg");
 }
 .rounded-show{
     border: 0.2px solid white !important;
@@ -83,27 +83,27 @@ h1,h2,h3,h4,h5,h6 {
 .bg-province{
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/alys.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/alys.jpg");
 }
 .header-rechercher {
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/Header.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/Header.jpg");
     position: relative;
 }
 .header-profile{
-    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/ahm.jpg");
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/ahm.jpg");
     background-size: cover;
     background-position: center center;
 }
 .bg-addRecette{
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/cal.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/cal.jpg");
 }
 
 .header-register {
-    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/MAL1.jpg");
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/MAL1.jpg");
     background-size: cover;
     background-position: center center;
 }
@@ -134,7 +134,7 @@ h1,h2,h3,h4,h5,h6 {
     height: 100px; /* Réglez la hauteur souhaitée en pixels */
 }
 .header-contact {
-    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../../images/alys.jpg");
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url("../images/alys.jpg");
     background-size: cover;
     background-position: center center;
 }
@@ -186,7 +186,7 @@ h1,h2,h3,h4,h5,h6 {
 .bg-Showrecette {
     background-size: cover;
     background-position: center center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/MAL2.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../images/MAL2.jpg");
 
 }
 .padding-50{
